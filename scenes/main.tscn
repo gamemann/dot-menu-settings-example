@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3 uid="uid://7ug8f1811nh0"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_hauxf"]
+
+[sub_resource type="Sky" id="Sky_hvq0b"]
+
+[sub_resource type="Environment" id="Environment_0qbrr"]
+background_mode = 2
+sky = SubResource("Sky_hvq0b")
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_hauxf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 9.4716, 40)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_0qbrr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 17.0578, 0)
+
+[node name="Menu" type="Node2D" parent="."]
+
+[node name="Container" type="SubViewportContainer" parent="Menu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 650.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Port" type="SubViewport" parent="Menu/Container"]
+size = Vector2i(1152, 650)
+
+[node name="Width" type="Control" parent="Menu/Container/Port"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Menu/Container/Port/Width"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Width: "
+
+[node name="Value" type="LineEdit" parent="Menu/Container/Port/Width"]
+layout_mode = 0
+offset_left = 58.195
+offset_right = 165.063
+offset_bottom = 31.0
+
+[node name="Height" type="Control" parent="Menu/Container/Port"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 35.0
+offset_right = 40.0
+offset_bottom = 75.0
+
+[node name="Label" type="Label" parent="Menu/Container/Port/Height"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Height:"
+
+[node name="Value" type="LineEdit" parent="Menu/Container/Port/Height"]
+layout_mode = 0
+offset_left = 58.195
+offset_right = 165.063
+offset_bottom = 31.0
+
+[node name="Apply" type="Control" parent="Menu/Container/Port"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Menu/Container/Port/Apply"]
+layout_mode = 0
+offset_top = 95.0
+offset_right = 56.0
+offset_bottom = 126.0
+text = "Apply!"
+
+[node name="Windowed" type="Control" parent="Menu/Container/Port"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 70.0
+offset_right = 40.0
+offset_bottom = 110.0
+
+[node name="Label" type="Label" parent="Menu/Container/Port/Windowed"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Windowed:"
+
+[node name="Value" type="CheckBox" parent="Menu/Container/Port/Windowed"]
+layout_mode = 0
+offset_left = 84.455
+offset_right = 108.455
+offset_bottom = 24.0
+
+[connection signal="pressed" from="Menu/Container/Port/Apply/Button" to="." method="_on_apply_pressed"]
